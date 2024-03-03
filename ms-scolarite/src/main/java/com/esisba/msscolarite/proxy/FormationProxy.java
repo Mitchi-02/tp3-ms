@@ -2,6 +2,7 @@ package com.esisba.msscolarite.proxy;
 
 
 import com.esisba.msscolarite.model.Formation;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface FormationProxy {
 
     @GetMapping("/formations/{id}")
-
+    @CircuitBreaker(name = "fallback1", fallbackMethod = "fallbackFormation")
     public Formation getFormation(@PathVariable("id") Long idf);
 
-  /* get  http://localhost:8081/formations/1
-    gerFormation(1)
-
-    get  http://localhost:8081/formations/2
-    getFormation(2)*/
+    default Formation fallbackFormation(Throwable th){
+        return new Formation(1L, "default", 20);
+    }
 }

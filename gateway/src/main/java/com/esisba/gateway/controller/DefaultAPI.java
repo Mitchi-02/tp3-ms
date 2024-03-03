@@ -13,7 +13,6 @@ public class DefaultAPI {
     @GetMapping("/defaultFormations")
     public List<FormationDTO> getDefaultFormations() {
         List<FormationDTO> l = new ArrayList<>();
-        
         return l;
     }
 }
