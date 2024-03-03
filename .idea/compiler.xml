@@ -11,11 +11,13 @@
         <module name="registry" />
         <module name="ms-scolarite" />
         <module name="ms-bourse" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="gateway" options="-parameters" />
       <module name="ms-bourse" options="-parameters" />
       <module name="ms-formation" options="-parameters" />
       <module name="ms-scolarite" options="-parameters" />
